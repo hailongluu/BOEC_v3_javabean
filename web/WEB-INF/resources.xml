@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <Resource id="boec" type="javax.sql.DataSource">#Tue May 14 15:02:20 ICT 2019
+jdbcDriver=com.mysql.jdbc.Driver
+password=111111
+userName=root
+jdbcUrl=jdbc\:mysql\://localhost\:3306/oebcv2?
+</Resource>
+</resources>
