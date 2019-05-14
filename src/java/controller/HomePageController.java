@@ -52,7 +52,7 @@ public class HomePageController extends HttpServlet {
             throws ServletException, IOException {
         
          List<Product> products = productFacade.findAll();
-        request.getSession().setAttribute("listProducts", products);
+        request.setAttribute("listProducts", products);
         request.getRequestDispatcher("index.jsp").forward(request, response);
         
     }
