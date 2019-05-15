@@ -39,7 +39,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="account.jsp">Account</a>
-                            <a class="dropdown-item" href="#">Notification</a>
+                            <a class="dropdown-item" href=<%=request.getContextPath()+"/managerorder"%>>Notification</a>
                             <a class="dropdown-item" href=<%=request.getContextPath()+"/logout"%>>Logout</a>
                         </div>
                     </div>

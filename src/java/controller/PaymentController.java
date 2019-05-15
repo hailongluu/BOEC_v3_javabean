@@ -75,6 +75,7 @@ public class PaymentController extends HttpServlet {
          OrderDAO orderDAO = new OrderDAOImpl();
          
          orderDAO.addBill(bill);
+         response.sendRedirect(request.getContextPath()+"/managerorder");
         System.out.println("");
     }
 

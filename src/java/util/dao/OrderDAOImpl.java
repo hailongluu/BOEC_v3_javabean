@@ -10,11 +10,14 @@ import entities.order.Cart;
 import entities.order.CartProduct;
 import entities.order.Order1;
 import entities.product.Product;
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import util.DBconnection;
@@ -141,4 +144,69 @@ public class OrderDAOImpl implements OrderDAO {
         }
         return false;
     }
+
+    public List<CartProduct> findCartProducts(int id) {
+        try {
+            List<CartProduct> list = new ArrayList<>();
+            String sql = "SELECT * FROM cart_product WHERE CartID =?;";
+            PreparedStatement pre = connection.prepareStatement(sql);
+            pre.setInt(1, id);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                CartProduct cartProduct = new CartProduct();
+                cartProduct.setProductId(new Product(rs.getString(3)));
+                cartProduct.setQuantity(rs.getInt(4));
+                list.add(cartProduct);
+            }
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public Cart findCartById(int id) {
+        try {
+            Cart cart = new Cart(id);
+            String sql = "SELECT * FROM cart WHERE ID =?;";
+            PreparedStatement pre = connection.prepareStatement(sql);
+            pre.setInt(1, id);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                cart.setTotalPrice(new BigInteger(rs.getString(2)));
+                List<CartProduct> list = new ArrayList<>();
+                list = findCartProducts(id);
+                cart.setCartProductList(list);
+            }
+            return cart;
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public List<Order1> findOrderByCusId(int id) {
+        try {
+            List<Order1> list = new ArrayList<>();
+            String sql = "SELECT * FROM order1 WHERE CustomerID = ?";
+            PreparedStatement pre = connection.prepareStatement(sql);
+            pre.setInt(1, id);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                Order1 order = new Order1(rs.getInt(1));
+                order.setShippingAddress(rs.getString(7));
+                order.setOrderStatus(rs.getString(5));
+                order.setDateCreated(TimeConvert.converToDate(rs.getString(4)));
+                order.setShippingStatus(rs.getString(6));
+                Cart cart = findCartById(rs.getInt(1));
+                order.setCart(cart);
+                list.add(order);
+            }
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 }

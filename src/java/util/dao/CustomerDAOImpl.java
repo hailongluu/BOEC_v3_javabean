@@ -6,10 +6,17 @@
 package util.dao;
 
 import entities.customer.Customer;
+import entities.order.Cart;
+import entities.order.CartProduct;
+import entities.order.Order1;
+import entities.product.Product;
+import java.math.BigInteger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import util.DBconnection;
@@ -89,4 +96,6 @@ public class CustomerDAOImpl {
         }
         return 0;
     }
+    
+    
 }
