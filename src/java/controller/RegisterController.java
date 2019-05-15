@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import util.dao.CustomerDAOImpl;
 
 /**
  *
@@ -77,6 +78,8 @@ public class RegisterController extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("isLogin", "true");
             session.setAttribute("customer", customer);
+            CustomerDAOImpl customerDAOImpl = new CustomerDAOImpl();
+            customerDAOImpl.addCustomer(customer);
             RequestDispatcher req = request.getRequestDispatcher("register_success.jsp");
             req.forward(request, response);
 

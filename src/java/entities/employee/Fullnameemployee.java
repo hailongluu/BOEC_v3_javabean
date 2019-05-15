@@ -6,20 +6,20 @@
 package entities.employee;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -51,11 +51,8 @@ public class Fullnameemployee implements Serializable {
     @Size(max = 255)
     @Column(name = "Lastname")
     private String lastname;
-    @JoinColumns({
-        @JoinColumn(name = "EmployeeID", referencedColumnName = "ID")
-        , @JoinColumn(name = "EmployeeID", referencedColumnName = "ID")})
-    @ManyToOne(optional = false)
-    private Employee employee;
+    @OneToMany(mappedBy = "name")
+    private List<Employee> employeeList;
 
     public Fullnameemployee() {
     }
@@ -96,12 +93,13 @@ public class Fullnameemployee implements Serializable {
         this.lastname = lastname;
     }
 
-    public Employee getEmployee() {
-        return employee;
+    @XmlTransient
+    public List<Employee> getEmployeeList() {
+        return employeeList;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setEmployeeList(List<Employee> employeeList) {
+        this.employeeList = employeeList;
     }
 
     @Override

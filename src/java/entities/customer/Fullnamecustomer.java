@@ -106,7 +106,7 @@ public class Fullnamecustomer implements Serializable {
     }
     public String getFullName(){
         StringBuilder sb = new StringBuilder(firstname);
-        sb.append(" ").append(middlename).append(" ").append(lastname);
+        sb.append(" ").append(lastname);
         return sb.toString();
                 
     }

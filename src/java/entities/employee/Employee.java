@@ -6,21 +6,19 @@
 package entities.employee;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -32,14 +30,17 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")
     , @NamedQuery(name = "Employee.findById", query = "SELECT e FROM Employee e WHERE e.id = :id")
-    , @NamedQuery(name = "Employee.findByAccount", query = "SELECT e FROM Employee e WHERE e.account = :account")
-    , @NamedQuery(name = "Employee.findByName", query = "SELECT e FROM Employee e WHERE e.name = :name")
-    , @NamedQuery(name = "Employee.findByAddress", query = "SELECT e FROM Employee e WHERE e.address = :address")
     , @NamedQuery(name = "Employee.findByIdnumber", query = "SELECT e FROM Employee e WHERE e.idnumber = :idnumber")
     , @NamedQuery(name = "Employee.findByPhone", query = "SELECT e FROM Employee e WHERE e.phone = :phone")
     , @NamedQuery(name = "Employee.findByEmail", query = "SELECT e FROM Employee e WHERE e.email = :email")})
 public class Employee implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
     @Size(max = 255)
     @Column(name = "Idnumber")
     private String idnumber;
@@ -51,27 +52,15 @@ public class Employee implements Serializable {
     @Size(max = 255)
     @Column(name = "Email")
     private String email;
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private Integer id;
-    @Column(name = "Account")
-    private Integer account;
-    @Column(name = "Name")
-    private Integer name;
-    @Column(name = "Address")
-    private Integer address;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
-    private List<Seller> sellerList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
-    private List<Shipper> shipperList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
-    private List<Manager> managerList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
-    private List<Fullnameemployee> fullnameemployeeList;
+    @JoinColumn(name = "Account", referencedColumnName = "ID")
+    @ManyToOne
+    private Accountemployee account;
+    @JoinColumn(name = "Address", referencedColumnName = "ID")
+    @ManyToOne
+    private Addressemployee address;
+    @JoinColumn(name = "Name", referencedColumnName = "ID")
+    @ManyToOne
+    private Fullnameemployee name;
 
     public Employee() {
     }
@@ -88,65 +77,52 @@ public class Employee implements Serializable {
         this.id = id;
     }
 
-    public Integer getAccount() {
+    public String getIdnumber() {
+        return idnumber;
+    }
+
+    public void setIdnumber(String idnumber) {
+        this.idnumber = idnumber;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Accountemployee getAccount() {
         return account;
     }
 
-    public void setAccount(Integer account) {
+    public void setAccount(Accountemployee account) {
         this.account = account;
     }
 
-    public Integer getName() {
-        return name;
-    }
-
-    public void setName(Integer name) {
-        this.name = name;
-    }
-
-    public Integer getAddress() {
+    public Addressemployee getAddress() {
         return address;
     }
 
-    public void setAddress(Integer address) {
+    public void setAddress(Addressemployee address) {
         this.address = address;
     }
 
-
-    @XmlTransient
-    public List<Seller> getSellerList() {
-        return sellerList;
+    public Fullnameemployee getName() {
+        return name;
     }
 
-    public void setSellerList(List<Seller> sellerList) {
-        this.sellerList = sellerList;
-    }
-
-    @XmlTransient
-    public List<Shipper> getShipperList() {
-        return shipperList;
-    }
-
-    public void setShipperList(List<Shipper> shipperList) {
-        this.shipperList = shipperList;
-    }
-
-    @XmlTransient
-    public List<Manager> getManagerList() {
-        return managerList;
-    }
-
-    public void setManagerList(List<Manager> managerList) {
-        this.managerList = managerList;
-    }
-
-    @XmlTransient
-    public List<Fullnameemployee> getFullnameemployeeList() {
-        return fullnameemployeeList;
-    }
-
-    public void setFullnameemployeeList(List<Fullnameemployee> fullnameemployeeList) {
-        this.fullnameemployeeList = fullnameemployeeList;
+    public void setName(Fullnameemployee name) {
+        this.name = name;
     }
 
     @Override
@@ -172,30 +148,6 @@ public class Employee implements Serializable {
     @Override
     public String toString() {
         return "entities.employee.Employee[ id=" + id + " ]";
-    }
-
-    public String getIdnumber() {
-        return idnumber;
-    }
-
-    public void setIdnumber(String idnumber) {
-        this.idnumber = idnumber;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
     
 }
