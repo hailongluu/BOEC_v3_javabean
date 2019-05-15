@@ -5,6 +5,8 @@
   Time: 22:29
   To change this template use File | Settings | File Templates.
 --%>
+<%@page import="entities.customer.Accountcustomer"%>
+<%@page import="entities.customer.Customer"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
 </head>
@@ -25,15 +27,17 @@
         </div>
         <div>
             <ul class="nav navbar-nav navbar-right navbar-horizontal">
-                <% if (session.getAttribute("isLogin") != null) { %>
+                <% if (session.getAttribute("isLogin") != null) {
+                Customer customer = (Customer) session.getAttribute("customer");      
+                %>
                     <div class="dropdown" style="color: white;margin: 25px;font-size: 19px;">
                         <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Pham Hoang Anh
+                            <%=customer.getName().getFullName()%>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="account.jsp">Account</a>
                             <a class="dropdown-item" href="#">Notification</a>
-                            <a class="dropdown-item" href="#">Logout</a>
+                            <a class="dropdown-item" href= "/logout">Logout</a>
                         </div>
                     </div>
                 <% } else { %>

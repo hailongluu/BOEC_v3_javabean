@@ -6,20 +6,20 @@
 package entities.customer;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -35,24 +35,20 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Accountcustomer.findByPassword", query = "SELECT a FROM Accountcustomer a WHERE a.password = :password")})
 public class Accountcustomer implements Serializable {
 
-    @Size(max = 255)
-    @Column(name = "Username")
-    private String username;
-    @Size(max = 255)
-    @Column(name = "Password")
-    private String password;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @JoinColumns({
-        @JoinColumn(name = "CustomerID", referencedColumnName = "ID")
-        , @JoinColumn(name = "CustomerID", referencedColumnName = "ID")})
-    @ManyToOne(optional = false)
-    private Customer customer;
+    @Size(max = 255)
+    @Column(name = "Username")
+    private String username;
+    @Size(max = 255)
+    @Column(name = "Password")
+    private String password;
+    @OneToMany(mappedBy = "account")
+    private List<Customer> customerList;
 
     public Accountcustomer() {
     }
@@ -69,13 +65,29 @@ public class Accountcustomer implements Serializable {
         this.id = id;
     }
 
-
-    public Customer getCustomer() {
-        return customer;
+    public String getUsername() {
+        return username;
     }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @XmlTransient
+    public List<Customer> getCustomerList() {
+        return customerList;
+    }
+
+    public void setCustomerList(List<Customer> customerList) {
+        this.customerList = customerList;
     }
 
     @Override
@@ -100,23 +112,7 @@ public class Accountcustomer implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Accountcustomer[ id=" + id + " ]";
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+        return "entities.customer.Accountcustomer[ id=" + id + " ]";
     }
     
 }
