@@ -7,7 +7,7 @@ package controller;
 
 import entities.product.Product;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -23,7 +23,7 @@ import session.ProductFacadeLocal;
  */
 @WebServlet(name = "HomePageController", urlPatterns = {"/home"})
 public class HomePageController extends HttpServlet {
-
+    
     @EJB
     private ProductFacadeLocal productFacade;
 
@@ -51,8 +51,9 @@ public class HomePageController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-         List<Product> products = productFacade.findAll();
-        request.getSession().setAttribute("listProducts", products);
+        List<Product> listProducts = new ArrayList<>();
+        listProducts.addAll(productFacade.findAll());
+        request.getSession().setAttribute("listProducts", listProducts);
         request.getRequestDispatcher("index.jsp").forward(request, response);
         
     }
