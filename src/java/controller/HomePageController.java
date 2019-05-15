@@ -5,7 +5,9 @@
  */
 package controller;
 
-import entities.product.Product;
+import entities.product.book.Book;
+import entities.product.clother.Clothes;
+import entities.product.electronic.Electronics;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +17,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static org.apache.webbeans.jsf.JSFUtil.getSession;
+import session.BookFacadeLocal;
+import session.ClothesFacadeLocal;
+import session.ElectronicsFacadeLocal;
 import session.ProductFacadeLocal;
 
 /**
@@ -25,7 +31,10 @@ import session.ProductFacadeLocal;
 public class HomePageController extends HttpServlet {
     
     @EJB
-    private ProductFacadeLocal productFacade;
+//    private ProductFacadeLocal productFacade;
+    private BookFacadeLocal bookFacade;
+    private ElectronicsFacadeLocal electronicsFacade;
+    private ClothesFacadeLocal clothesFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,9 +60,20 @@ public class HomePageController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        List<Product> listProducts = new ArrayList<>();
-        listProducts.addAll(productFacade.findAll());
-        request.getSession().setAttribute("listProducts", listProducts);
+//        List<Product> listProducts = new ArrayList<>();
+//        listProducts.addAll(productFacade.findAll());
+        List<Book> listBooks = new ArrayList<>();
+        List<Electronics> listElectronics = new ArrayList<>();
+        List<Clothes> listClothes = new ArrayList<>();
+        listBooks.addAll(bookFacade.findAll());
+        System.out.println("");
+        listElectronics.addAll(electronicsFacade.findAll());
+        listClothes.addAll(clothesFacade.findAll());
+//        request.getSession().setAttribute("listProducts", listProducts);
+        request.getSession().setAttribute("listBooks", listBooks);
+        request.getSession().setAttribute("listElectronics", listElectronics);
+        request.getSession().setAttribute("listClothes", listClothes);
+
         request.getRequestDispatcher("index.jsp").forward(request, response);
         
     }

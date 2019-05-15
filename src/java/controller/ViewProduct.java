@@ -8,6 +8,7 @@ package controller;
 
 import entities.product.Product;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -42,7 +43,9 @@ public class ViewProduct extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Product> products = productFacade.findAll();
+        List<Product> products = new ArrayList<>();
+        products.addAll(productFacade.findAll());
+        products.add(productFacade.find("C0001"));
         request.getSession().setAttribute("listProducts", products);
         request.getRequestDispatcher("view.jsp").forward(request, response);
     }

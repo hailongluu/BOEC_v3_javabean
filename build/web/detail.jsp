@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 <%@page import="entities.product.Product"%>
 <%@page import="session.BookFacade"%>
 <%@page import="entities.product.book.Book"%>
+=======
+<%@ page import="group.faf.bookstore.model.product.book.BookDAOImpl" %>
+<%@ page import="group.faf.bookstore.model.product.book.Book" %>
+<%@ page import="group.faf.bookstore.model.order.Cart" %>
+<%@ page import="group.faf.bookstore.model.product.Product" %>
+>>>>>>> master
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 <!DOCTYPE html>
@@ -136,14 +143,14 @@ echo ' --%>
         <h2> Description </h2>
         <p> For Student only </p>
         <pre style="background:inherit;border:none;">
-   PRODUCT CODE  <%=book.getId()%> <hr>
-   TITLE         <%=book.getName()%> <hr>
-   AUTHOR        <%=book.getAuthor()%> <hr>
+   PRODUCT CODE  <%=product.getId()%> <hr>
+   TITLE         <%=product.getName()%> <hr>
+   AUTHOR        <%=product.getAuthor()%> <hr>
    AVAILABLE     20 <hr>
-   PUBLISHER     <%=book.getPublisher()%><hr>
+   PUBLISHER     <%=product.getPublisher()%><hr>
    EDITION       6th <hr>
    LANGUAGE      Vietnamese <hr>
-   PAGES         <%=book.getNumberOfPage()%> <hr>
+   PAGES         <%=product.getNumberOfPage()%> <hr>
                         </pre>
     </div>
 </div>
@@ -192,7 +199,7 @@ echo ' --%>
     function btnAddClick() {
         var select = document.getElementById("quantity");
         var url = window.location;
-        var new_url = "http://localhost:8080/detail_added.jsp?id=" + <%=book.getId()%>;
+        var new_url = "http://localhost:8080/detail_added.jsp?id=" + <%=product.getId()%>;
         if (select.selectedIndex == NaN)
             new_url += + "&quantity=1";
         else
