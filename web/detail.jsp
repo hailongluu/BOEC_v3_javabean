@@ -1,7 +1,4 @@
-<%@ page import="group.faf.bookstore.model.product.book.BookDAOImpl" %>
-<%@ page import="group.faf.bookstore.model.product.book.Book" %>
-<%@ page import="group.faf.bookstore.model.order.Cart" %>
-<%@ page import="group.faf.bookstore.model.product.Product" %>
+<%@page import="entities.product.Product"%>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 <!DOCTYPE html>
@@ -82,8 +79,8 @@
 <body>
 <%@ include file="header.jsp" %>
 <%
-    BookDAOImpl bookDAO = new BookDAOImpl();
-    Book book = bookDAO.getBookById(Integer.parseInt(request.getParameter("id")));
+    Product product = (Product) session.getAttribute("product");
+    int type = (Integer) session.getAttribute("type");
 %>
 
 <%-- <?jsp
@@ -104,15 +101,21 @@ echo ' --%>
             <div class="tag">50% OFF</div>
             <div class="tag-side"><img src="img/orange-flag.png">
             </div>
-            <img class="center-block img-responsive" src=<%=book.getImageLink()%> height="550px" style="padding:20px;">
+            <img class="center-block img-responsive" src=<%=product.getImageLink()%> height="550px" style="padding:20px;">
         </div>
         <div class="col-sm-10 col-md-4 offset-md-1">
-            <h2 id="product_name"><%=book.getName()%>
+            <h2 id="product_name"><%=product.getName()%>
             </h2>
             <span style="color:#00B9F5;">
-                                    <%=book.getAuthor() + " - " + book.getPublisher()%>
-                                <%--Nguyen X - NXB GIAO DUC--%>
-                                </span>
+                <%
+                    if (type == 0) {
+                %>
+                        <%=product.getBook().getAuthor() + " - " + product.getBook().getPublisherId().getName()%>
+                <%
+                    }
+                %>
+            <%--Nguyen X - NXB GIAO DUC--%>
+            </span>
             <hr>
             <span style="font-weight:bold;"> Quantity : </span>
             <select id="quantity" name="quantity">
@@ -137,15 +140,21 @@ echo ' --%>
         <h2> Description </h2>
         <p> For Student only </p>
         <pre style="background:inherit;border:none;">
-   PRODUCT CODE  <%=book.getId()%> <hr>
-   TITLE         <%=book.getName()%> <hr>
-   AUTHOR        <%=book.getAuthor()%> <hr>
-   AVAILABLE     20 <hr>
-   PUBLISHER     <%=book.getPublisher()%><hr>
-   EDITION       6th <hr>
-   LANGUAGE      Vietnamese <hr>
-   PAGES         <%=book.getNumberOfPage()%> <hr>
-                        </pre>
+            <%
+                if (type == 0) {
+            %>
+                    PRODUCT CODE  <%=product.getId()%> <hr>
+                    TITLE         <%=product.getName()%> <hr>
+                    AUTHOR        <%=product.getBook().getAuthor()%> <hr>
+                    AVAILABLE     20 <hr>
+                    PUBLISHER     <%=product.getBook().getPublisherId().getName()%><hr>
+                    EDITION       6th <hr>
+                    LANGUAGE      Vietnamese <hr>
+                    PAGES         <%=product.getBook().getNumOfPage()%> <hr>
+            <%
+                }
+            %>
+        </pre>
     </div>
 </div>
 </div>
@@ -193,7 +202,7 @@ echo ' --%>
     function btnAddClick() {
         var select = document.getElementById("quantity");
         var url = window.location;
-        var new_url = "http://localhost:8080/detail_added.jsp?id=" + <%=book.getId()%>;
+        var new_url = "http://localhost:8080/detail_added.jsp?id=" + <%=product.getId()%>;
         if (select.selectedIndex == NaN)
             new_url += + "&quantity=1";
         else
