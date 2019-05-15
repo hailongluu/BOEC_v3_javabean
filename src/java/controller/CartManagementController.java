@@ -5,33 +5,25 @@
  */
 package controller;
 
-import entities.product.Product;
+import entities.order.Cart;
+import entities.order.CartProduct;
 import java.io.IOException;
-import javax.ejb.EJB;
+import java.io.PrintWriter;
+import java.math.BigInteger;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import session.BookFacadeLocal;
-import session.ClothesFacadeLocal;
-import session.ElectronicsFacadeLocal;
-import session.ProductFacadeLocal;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author ASUS
  */
-@WebServlet(name = "ProductDetaiController", urlPatterns = {"/detail"})
-public class ProductDetaiController extends HttpServlet {
-    
-    @EJB
-    BookFacadeLocal bookFacade;
-    @EJB
-    ElectronicsFacadeLocal electronicsFacade;
-    @EJB
-    ClothesFacadeLocal clothesFacade;
-    
+@WebServlet(name = "CartManagementController", urlPatterns = {"/cart"})
+public class CartManagementController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -59,22 +51,19 @@ public class ProductDetaiController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("id");
-        int type = 0;
-        Product product = null;
-        if (id.charAt(0) == 'B')
-            product = bookFacade.find(id).getProduct();
-        else if (id.charAt(0) == 'E') {
-            type = 1;
-            product = clothesFacade.find(id).getProduct();
+        HttpSession session = request.getSession();
+        Cart cart = (Cart) session.getAttribute("cart");
+        if (cart == null) {
+            cart = new Cart();
+            cart.setTotalPrice(new BigInteger("0"));
+            session.setAttribute("cart", cart);
         }
-        else if (id.charAt(0) == 'C') {
-            type = 2;
-            product = electronicsFacade.find(id).getProduct();
-        }
-        request.setAttribute("type", type);
-        request.setAttribute("product", product);
-        request.getRequestDispatcher("detail.jsp").forward(request, response);
+        ArrayList<CartProduct> listCartProduct = new ArrayList<>();
+        if (cart.getCartProductList() != null)
+            listCartProduct.addAll(cart.getCartProductList());
+        cart.setCartProductList(listCartProduct);
+        request.setAttribute("cart", cart);
+        request.getRequestDispatcher("cart.jsp").forward(request, response);
     }
 
     /**
@@ -88,7 +77,6 @@ public class ProductDetaiController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**
@@ -101,7 +89,4 @@ public class ProductDetaiController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void checkType(String id) {
-        
-    }
 }

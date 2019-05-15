@@ -16,7 +16,7 @@
 <div id="top">
     <div id="searchbox" style="display: inline-flex; width: 100%;">
         <div style="margin: 20px">
-            <a class="" href="/"><img class="img-responsive" alt="Brand"
+            <a class="" href="/boecdemov3/home"><img class="img-responsive" alt="Brand"
                                       src="img/logo_white_n.jpg"
                                       style="width: 100px; margin: 5px 15px;"></a></div>
         <div style="margin:20px 20px 20px 20px;width: 70%">

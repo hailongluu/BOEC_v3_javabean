@@ -3,25 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/I:/javaprj/boecdemov3/web/header.jsp</file>
-            <file>file:/I:/javaprj/boecdemov3/src/java/entities/product/Product.java</file>
-            <file>file:/I:/javaprj/boecdemov3/src/java/entities/customer/Fullnamecustomer.java</file>
-            <file>file:/I:/javaprj/boecdemov3/web/register.jsp</file>
-            <file>file:/I:/javaprj/boecdemov3/src/java/entities/customer/Addresscustomer.java</file>
-            <file>file:/I:/javaprj/boecdemov3/web/detail_added.jsp</file>
-            <file>file:/I:/javaprj/boecdemov3/web/register_success.jsp</file>
-            <file>file:/I:/javaprj/boecdemov3/src/java/controller/HomePageController.java</file>
-            <file>file:/I:/javaprj/boecdemov3/src/java/controller/LoginController.java</file>
-            <file>file:/I:/javaprj/boecdemov3/web/payment.jsp</file>
-            <file>file:/I:/javaprj/boecdemov3/web/view.jsp</file>
-            <file>file:/I:/javaprj/boecdemov3/web/index.xhtml</file>
-            <file>file:/I:/javaprj/boecdemov3/src/java/controller/RegisterController.java</file>
-            <file>file:/I:/javaprj/boecdemov3/src/java/entities/customer/Customer.java</file>
-            <file>file:/I:/javaprj/boecdemov3/web/index.jsp</file>
-            <file>file:/I:/javaprj/boecdemov3/src/java/controller/ViewProduct.java</file>
-            <file>file:/I:/javaprj/boecdemov3/src/java/controller/LogoutController.java</file>
-            <file>file:/I:/javaprj/boecdemov3/web/login.jsp</file>
-            <file>file:/I:/javaprj/boecdemov3/web/detail.jsp</file>
+            <file>file:/C:/Users/ASUS/Desktop/boec_v3/BOEC_v3_javabean/web/WEB-INF/resources.xml</file>
+            <file>file:/C:/Users/ASUS/Desktop/boec_v3/BOEC_v3_javabean/web/view.jsp</file>
+            <file>file:/C:/Users/ASUS/Desktop/boec_v3/BOEC_v3_javabean/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/ASUS/Desktop/boec_v3/BOEC_v3_javabean/src/java/entities/product/Product.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/boec_v3/BOEC_v3_javabean/src/java/controller/ViewProduct.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/boec_v3/BOEC_v3_javabean/src/java/controller/LogoutController.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/boec_v3/BOEC_v3_javabean/web/META-INF/context.xml</file>
+            <file>file:/C:/Users/ASUS/Desktop/boec_v3/BOEC_v3_javabean/web/register_success.jsp</file>
+            <file>file:/C:/Users/ASUS/Desktop/boec_v3/BOEC_v3_javabean/web/index.jsp</file>
+            <file>file:/C:/Users/ASUS/Desktop/boec_v3/BOEC_v3_javabean/src/java/controller/HomePageController.java</file>
+            <file>file:/C:/Users/ASUS/Desktop/boec_v3/BOEC_v3_javabean/src/java/entities/order/Cart.java</file>
         </group>
     </open-files>
 </project-private>
