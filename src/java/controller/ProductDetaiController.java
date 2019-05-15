@@ -72,8 +72,8 @@ public class ProductDetaiController extends HttpServlet {
             type = 2;
             product = electronicsFacade.find(id).getProduct();
         }
-        request.getSession().setAttribute("type", type);
-        request.getSession().setAttribute("product", product);
+        request.setAttribute("type", type);
+        request.setAttribute("product", product);
         request.getRequestDispatcher("detail.jsp").forward(request, response);
     }
 
@@ -101,4 +101,7 @@ public class ProductDetaiController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private void checkType(String id) {
+        
+    }
 }

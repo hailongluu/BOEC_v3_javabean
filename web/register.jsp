@@ -32,7 +32,7 @@
 
     <div class="form-group">
         <label for="uname">UserName</label>
-        <input type="text" class="form-control" id="uname" placeholder="Your username" name="userName">
+        <input type="text" class="form-control" id="uname" placeholder="Your username" name="username">
     </div>
 
     <div class="form-group">

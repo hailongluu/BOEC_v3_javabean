@@ -36,12 +36,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Addresscustomer.findByStreet", query = "SELECT a FROM Addresscustomer a WHERE a.street = :street")})
 public class Addresscustomer implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private Integer id;
     @Size(max = 255)
     @Column(name = "City")
     private String city;
@@ -51,6 +45,13 @@ public class Addresscustomer implements Serializable {
     @Size(max = 255)
     @Column(name = "Street")
     private String street;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
     @OneToMany(mappedBy = "address")
     private List<Customer> customerList;
 
@@ -69,29 +70,6 @@ public class Addresscustomer implements Serializable {
         this.id = id;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getDistrict() {
-        return district;
-    }
-
-    public void setDistrict(String district) {
-        this.district = district;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
 
     @XmlTransient
     public List<Customer> getCustomerList() {
@@ -125,6 +103,30 @@ public class Addresscustomer implements Serializable {
     @Override
     public String toString() {
         return "entities.customer.Addresscustomer[ id=" + id + " ]";
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
     }
     
 }

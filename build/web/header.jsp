@@ -16,7 +16,7 @@
 <div id="top">
     <div id="searchbox" style="display: inline-flex; width: 100%;">
         <div style="margin: 20px">
-            <a class="" href="/"><img class="img-responsive" alt="Brand"
+            <a class="" href="/boecdemov3/home"><img class="img-responsive" alt="Brand"
                                       src="img/logo_white_n.jpg"
                                       style="width: 100px; margin: 5px 15px;"></a></div>
         <div style="margin:20px 20px 20px 20px;width: 70%">
@@ -37,7 +37,7 @@
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="account.jsp">Account</a>
                             <a class="dropdown-item" href="#">Notification</a>
-                            <a class="dropdown-item" href= "/logout">Logout</a>
+                            <a class="dropdown-item" href=<%=request.getContextPath()+"/logout"%>>Logout</a>
                         </div>
                     </div>
                 <% } else { %>

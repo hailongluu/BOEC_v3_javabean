@@ -36,12 +36,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Fullnamecustomer.findByLastname", query = "SELECT f FROM Fullnamecustomer f WHERE f.lastname = :lastname")})
 public class Fullnamecustomer implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private Integer id;
     @Size(max = 255)
     @Column(name = "Firstname")
     private String firstname;
@@ -51,6 +45,13 @@ public class Fullnamecustomer implements Serializable {
     @Size(max = 255)
     @Column(name = "Lastname")
     private String lastname;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
     @OneToMany(mappedBy = "name")
     private List<Customer> customerList;
 
@@ -69,29 +70,6 @@ public class Fullnamecustomer implements Serializable {
         this.id = id;
     }
 
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getMiddlename() {
-        return middlename;
-    }
-
-    public void setMiddlename(String middlename) {
-        this.middlename = middlename;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
-    }
 
     @XmlTransient
     public List<Customer> getCustomerList() {
@@ -131,6 +109,30 @@ public class Fullnamecustomer implements Serializable {
         sb.append(" ").append(middlename).append(" ").append(lastname);
         return sb.toString();
                 
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getMiddlename() {
+        return middlename;
+    }
+
+    public void setMiddlename(String middlename) {
+        this.middlename = middlename;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
     
 }

@@ -1,5 +1,6 @@
 package entities.product;
 
+import entities.order.CartProduct;
 import entities.product.book.Book;
 import entities.product.clother.Clothes;
 import entities.product.clother.Hat;
@@ -14,11 +15,13 @@ import entities.product.electronic.Laptop;
 import entities.product.electronic.Ram;
 import entities.product.electronic.Screen;
 import entities.product.electronic.Smartphone;
+import java.math.BigInteger;
 import javax.annotation.Generated;
+import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-05-15T18:08:44")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-05-15T20:44:48")
 @StaticMetamodel(Product.class)
 public class Product_ { 
 
@@ -36,7 +39,8 @@ public class Product_ {
     public static volatile SingularAttribute<Product, Disk> disk;
     public static volatile SingularAttribute<Product, Desktop> desktop;
     public static volatile SingularAttribute<Product, Shirt> shirt;
-    public static volatile SingularAttribute<Product, Long> price;
+    public static volatile ListAttribute<Product, CartProduct> cartProductList;
+    public static volatile SingularAttribute<Product, BigInteger> price;
     public static volatile SingularAttribute<Product, String> name;
     public static volatile SingularAttribute<Product, Hat> hat;
     public static volatile SingularAttribute<Product, String> id;

@@ -240,7 +240,7 @@
                                                 <div class="book-block">
                                                     <div class="tag">New</div>
                                                     <div class="tag-side"><img src="img/tag.png"></div>
-                                                    <img class="block-center img-responsive" src="<%=book.getProduct().getImageLink()%>" style="width: 200px; height: 200px;">
+                                                    <img class="block-center img-responsive" src="<%=book.getProduct().getImageLink()%>" style="width: 200px; height:300px;">
                                                     <hr>
                                                     <%=(book.getProduct().getName().length() < 30) ? book.getProduct().getName() : book.getProduct().getName().substring(0, 27) + "..."%> <br>
                                                     <%=book.getProduct().getPrice()%> USD
@@ -323,7 +323,7 @@
                                                 <div class="book-block">
                                                     <div class="tag">New</div>
                                                     <div class="tag-side"><img src="img/tag.png"></div>
-                                                    <img class="block-center img-responsive" src="<%=clothes.getProduct().getImageLink()%>" style="width: 200px; height: 200px;">
+                                                    <img class="block-center img-responsive" src="<%=clothes.getProduct().getImageLink()%>" style="width:200px; height:300px;">
                                                     <hr>
                                                     <%=(clothes.getProduct().getName().length() < 30) ? clothes.getProduct().getName() : clothes.getProduct().getName().substring(0, 27) + "..."%> <br>
                                                     <%=clothes.getProduct().getPrice()%> USD
@@ -407,7 +407,7 @@
                                                 <div class="book-block">
                                                     <div class="tag">New</div>
                                                     <div class="tag-side"><img src="img/tag.png"></div>
-                                                    <img class="block-center img-responsive" src="<%=electronics.getProduct().getImageLink()%>" style="width: 200px; height: 200px;">
+                                                    <img class="block-center img-responsive" src="<%=electronics.getProduct().getImageLink()%>" style="width:200px; height:300px;">
                                                     <hr>
                                                     <%=(electronics.getProduct().getName().length() < 30) ? electronics.getProduct().getName() : electronics.getProduct().getName().substring(0, 27) + "..."%> <br>
                                                     <%=electronics.getProduct().getPrice()%> USD
