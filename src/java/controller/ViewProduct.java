@@ -9,6 +9,8 @@ import entities.customer.Accountcustomer;
 import entities.customer.Customer;
 import entities.product.Product;
 import entities.product.book.Book;
+import entities.product.clother.Clothes;
+import entities.product.electronic.Electronics;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import session.AccountcustomerFacadeLocal;
 import session.BookFacadeLocal;
+import session.ClothesFacadeLocal;
 import session.CustomerFacadeLocal;
+import session.ElectronicsFacadeLocal;
 import session.ProductFacadeLocal;
 
 /**
@@ -29,6 +33,12 @@ import session.ProductFacadeLocal;
  */
 @WebServlet(urlPatterns = {"/view"})
 public class ViewProduct extends HttpServlet {
+
+    @EJB
+    private ClothesFacadeLocal clothesFacade;
+
+    @EJB
+    private ElectronicsFacadeLocal electronicsFacade;
 
     @EJB
     private BookFacadeLocal bookFacade;
@@ -58,7 +68,12 @@ public class ViewProduct extends HttpServlet {
         List<Customer> customers = new ArrayList<>();
         List<Accountcustomer> ac = new ArrayList<>();
         List<Book> books = new ArrayList<>();
+        List<Clothes> listClothers =new ArrayList<>();
+        List<Electronics> listElectronicses = new ArrayList<>();
+        listClothers.addAll(clothesFacade.findAll());
+        listElectronicses.addAll(electronicsFacade.findAll());
         books = bookFacade.findAll();
+        
         customers.addAll(customerFacade.findAll());
         products.addAll(productFacade.findAll());
         ac.addAll(accountcustomerFacade.findAll());

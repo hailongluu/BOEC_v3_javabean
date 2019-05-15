@@ -36,6 +36,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Fullnameemployee.findByLastname", query = "SELECT f FROM Fullnameemployee f WHERE f.lastname = :lastname")})
 public class Fullnameemployee implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
     @Size(max = 255)
     @Column(name = "Firstname")
     private String firstname;
@@ -45,13 +51,6 @@ public class Fullnameemployee implements Serializable {
     @Size(max = 255)
     @Column(name = "Lastname")
     private String lastname;
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private Integer id;
     @JoinColumns({
         @JoinColumn(name = "EmployeeID", referencedColumnName = "ID")
         , @JoinColumn(name = "EmployeeID", referencedColumnName = "ID")})
@@ -73,6 +72,29 @@ public class Fullnameemployee implements Serializable {
         this.id = id;
     }
 
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getMiddlename() {
+        return middlename;
+    }
+
+    public void setMiddlename(String middlename) {
+        this.middlename = middlename;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
 
     public Employee getEmployee() {
         return employee;
@@ -104,31 +126,7 @@ public class Fullnameemployee implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Fullnameemployee[ id=" + id + " ]";
-    }
-
-    public String getFirstname() {
-        return firstname;
-    }
-
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
-    }
-
-    public String getMiddlename() {
-        return middlename;
-    }
-
-    public void setMiddlename(String middlename) {
-        this.middlename = middlename;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+        return "entities.employee.Fullnameemployee[ id=" + id + " ]";
     }
     
 }

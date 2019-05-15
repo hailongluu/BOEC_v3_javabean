@@ -7,7 +7,9 @@ package entities.order;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,8 +17,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -28,7 +33,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Cart.findAll", query = "SELECT c FROM Cart c")
     , @NamedQuery(name = "Cart.findById", query = "SELECT c FROM Cart c WHERE c.id = :id")
-    , @NamedQuery(name = "Cart.findByOrderID", query = "SELECT c FROM Cart c WHERE c.orderID = :orderID")
     , @NamedQuery(name = "Cart.findByTotalPrice", query = "SELECT c FROM Cart c WHERE c.totalPrice = :totalPrice")})
 public class Cart implements Serializable {
 
@@ -38,10 +42,12 @@ public class Cart implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Column(name = "OrderID")
-    private Integer orderID;
     @Column(name = "TotalPrice")
     private BigInteger totalPrice;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cartID")
+    private List<CartProduct> cartProductList;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "cart")
+    private Order1 order1;
 
     public Cart() {
     }
@@ -58,20 +64,29 @@ public class Cart implements Serializable {
         this.id = id;
     }
 
-    public Integer getOrderID() {
-        return orderID;
-    }
-
-    public void setOrderID(Integer orderID) {
-        this.orderID = orderID;
-    }
-
     public BigInteger getTotalPrice() {
         return totalPrice;
     }
 
     public void setTotalPrice(BigInteger totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    @XmlTransient
+    public List<CartProduct> getCartProductList() {
+        return cartProductList;
+    }
+
+    public void setCartProductList(List<CartProduct> cartProductList) {
+        this.cartProductList = cartProductList;
+    }
+
+    public Order1 getOrder1() {
+        return order1;
+    }
+
+    public void setOrder1(Order1 order1) {
+        this.order1 = order1;
     }
 
     @Override
@@ -96,7 +111,7 @@ public class Cart implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Cart[ id=" + id + " ]";
+        return "entities.order.Cart[ id=" + id + " ]";
     }
     
 }

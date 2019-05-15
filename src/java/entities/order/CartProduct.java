@@ -5,16 +5,18 @@
  */
 package entities.order;
 
+import entities.product.Product;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -26,20 +28,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "CartProduct.findAll", query = "SELECT c FROM CartProduct c")
-    , @NamedQuery(name = "CartProduct.findByCartID", query = "SELECT c FROM CartProduct c WHERE c.cartID = :cartID")
-    , @NamedQuery(name = "CartProduct.findByProductId", query = "SELECT c FROM CartProduct c WHERE c.productId = :productId")
-    , @NamedQuery(name = "CartProduct.findById", query = "SELECT c FROM CartProduct c WHERE c.id = :id")})
+    , @NamedQuery(name = "CartProduct.findById", query = "SELECT c FROM CartProduct c WHERE c.id = :id")
+    , @NamedQuery(name = "CartProduct.findByQuantity", query = "SELECT c FROM CartProduct c WHERE c.quantity = :quantity")})
 public class CartProduct implements Serializable {
-
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "CartID")
-    private int cartID;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "ProductId")
-    private String productId;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,6 +38,14 @@ public class CartProduct implements Serializable {
     @NotNull
     @Column(name = "ID")
     private Integer id;
+    @Column(name = "quantity")
+    private Integer quantity;
+    @JoinColumn(name = "CartID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Cart cartID;
+    @JoinColumn(name = "ProductId", referencedColumnName = "Id")
+    @ManyToOne(optional = false)
+    private Product productId;
 
     public CartProduct() {
     }
@@ -55,19 +54,36 @@ public class CartProduct implements Serializable {
         this.id = id;
     }
 
-    public CartProduct(Integer id, int cartID, String productId) {
-        this.id = id;
-        this.cartID = cartID;
-        this.productId = productId;
-    }
-
-
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Cart getCartID() {
+        return cartID;
+    }
+
+    public void setCartID(Cart cartID) {
+        this.cartID = cartID;
+    }
+
+    public Product getProductId() {
+        return productId;
+    }
+
+    public void setProductId(Product productId) {
+        this.productId = productId;
     }
 
     @Override
@@ -92,23 +108,7 @@ public class CartProduct implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.CartProduct[ id=" + id + " ]";
-    }
-
-    public int getCartID() {
-        return cartID;
-    }
-
-    public void setCartID(int cartID) {
-        this.cartID = cartID;
-    }
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
+        return "entities.order.CartProduct[ id=" + id + " ]";
     }
     
 }

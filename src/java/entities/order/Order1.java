@@ -5,11 +5,12 @@
  */
 package entities.order;
 
-import entities.employee.Seller;
 import entities.customer.Customer;
+import entities.employee.Seller;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +21,7 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -38,22 +40,25 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Order1.findAll", query = "SELECT o FROM Order1 o")
     , @NamedQuery(name = "Order1.findById", query = "SELECT o FROM Order1 o WHERE o.id = :id")
     , @NamedQuery(name = "Order1.findByBillID", query = "SELECT o FROM Order1 o WHERE o.billID = :billID")
-    , @NamedQuery(name = "Order1.findByCart", query = "SELECT o FROM Order1 o WHERE o.cart = :cart")
-    , @NamedQuery(name = "Order1.findByIdCustomer", query = "SELECT o FROM Order1 o WHERE o.idCustomer = :idCustomer")
     , @NamedQuery(name = "Order1.findByDateCreated", query = "SELECT o FROM Order1 o WHERE o.dateCreated = :dateCreated")
     , @NamedQuery(name = "Order1.findByOrderStatus", query = "SELECT o FROM Order1 o WHERE o.orderStatus = :orderStatus")
     , @NamedQuery(name = "Order1.findByShippingStatus", query = "SELECT o FROM Order1 o WHERE o.shippingStatus = :shippingStatus")
     , @NamedQuery(name = "Order1.findByShippingAddress", query = "SELECT o FROM Order1 o WHERE o.shippingAddress = :shippingAddress")})
 public class Order1 implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "Id")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Column(name = "BillID")
     private int billID;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "IdCustomer")
-    private int idCustomer;
+    @Column(name = "DateCreated")
+    @Temporal(TemporalType.DATE)
+    private Date dateCreated;
     @Size(max = 255)
     @Column(name = "OrderStatus")
     private String orderStatus;
@@ -63,18 +68,11 @@ public class Order1 implements Serializable {
     @Size(max = 255)
     @Column(name = "ShippingAddress")
     private String shippingAddress;
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "Id")
-    private Integer id;
-    @Column(name = "Cart")
-    private Integer cart;
-    @Column(name = "DateCreated")
-    @Temporal(TemporalType.DATE)
-    private Date dateCreated;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "order1")
+    private Bill bill;
+    @JoinColumn(name = "Id", referencedColumnName = "ID", insertable = false, updatable = false)
+    @OneToOne(optional = false)
+    private Cart cart;
     @JoinColumns({
         @JoinColumn(name = "CustomerID", referencedColumnName = "ID")
         , @JoinColumn(name = "CustomerID", referencedColumnName = "ID")})
@@ -93,10 +91,9 @@ public class Order1 implements Serializable {
         this.id = id;
     }
 
-    public Order1(Integer id, int billID, int idCustomer) {
+    public Order1(Integer id, int billID) {
         this.id = id;
         this.billID = billID;
-        this.idCustomer = idCustomer;
     }
 
     public Integer getId() {
@@ -107,15 +104,13 @@ public class Order1 implements Serializable {
         this.id = id;
     }
 
-
-    public Integer getCart() {
-        return cart;
+    public int getBillID() {
+        return billID;
     }
 
-    public void setCart(Integer cart) {
-        this.cart = cart;
+    public void setBillID(int billID) {
+        this.billID = billID;
     }
-
 
     public Date getDateCreated() {
         return dateCreated;
@@ -125,6 +120,45 @@ public class Order1 implements Serializable {
         this.dateCreated = dateCreated;
     }
 
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public String getShippingStatus() {
+        return shippingStatus;
+    }
+
+    public void setShippingStatus(String shippingStatus) {
+        this.shippingStatus = shippingStatus;
+    }
+
+    public String getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(String shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
+
+    public Bill getBill() {
+        return bill;
+    }
+
+    public void setBill(Bill bill) {
+        this.bill = bill;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
 
     public Customer getCustomer() {
         return customer;
@@ -164,47 +198,7 @@ public class Order1 implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Order1[ id=" + id + " ]";
-    }
-
-    public int getBillID() {
-        return billID;
-    }
-
-    public void setBillID(int billID) {
-        this.billID = billID;
-    }
-
-    public int getIdCustomer() {
-        return idCustomer;
-    }
-
-    public void setIdCustomer(int idCustomer) {
-        this.idCustomer = idCustomer;
-    }
-
-    public String getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
-    public String getShippingStatus() {
-        return shippingStatus;
-    }
-
-    public void setShippingStatus(String shippingStatus) {
-        this.shippingStatus = shippingStatus;
-    }
-
-    public String getShippingAddress() {
-        return shippingAddress;
-    }
-
-    public void setShippingAddress(String shippingAddress) {
-        this.shippingAddress = shippingAddress;
+        return "entities.order.Order1[ id=" + id + " ]";
     }
     
 }

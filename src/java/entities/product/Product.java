@@ -5,6 +5,7 @@
  */
 package entities.product;
 
+import entities.order.CartProduct;
 import entities.product.electronic.Laptop;
 import entities.product.clother.Hat;
 import entities.product.clother.Shoes;
@@ -20,6 +21,8 @@ import entities.product.electronic.Smartphone;
 import entities.product.book.Book;
 import entities.product.clother.Shirt;
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -27,11 +30,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -53,16 +58,16 @@ public class Product implements Serializable {
     @Size(max = 255)
     @Column(name = "Brand")
     private String brand;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "Price")
-    private long price;
+    private BigInteger price;
     @Size(max = 255)
     @Column(name = "ImageLink")
     private String imageLink;
     @Size(max = 255)
     @Column(name = "Name")
     private String name;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
+    private List<CartProduct> cartProductList;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -109,7 +114,7 @@ public class Product implements Serializable {
         this.id = id;
     }
 
-    public Product(String id, long price) {
+    public Product(String id, BigInteger price) {
         this.id = id;
         this.price = price;
     }
@@ -277,11 +282,11 @@ public class Product implements Serializable {
         this.brand = brand;
     }
 
-    public long getPrice() {
+    public BigInteger getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(BigInteger price) {
         this.price = price;
     }
 
@@ -299,6 +304,15 @@ public class Product implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @XmlTransient
+    public List<CartProduct> getCartProductList() {
+        return cartProductList;
+    }
+
+    public void setCartProductList(List<CartProduct> cartProductList) {
+        this.cartProductList = cartProductList;
     }
     
 }

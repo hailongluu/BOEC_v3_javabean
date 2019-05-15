@@ -35,18 +35,19 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Accountcustomer.findByPassword", query = "SELECT a FROM Accountcustomer a WHERE a.password = :password")})
 public class Accountcustomer implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private Integer id;
     @Size(max = 255)
     @Column(name = "Username")
     private String username;
     @Size(max = 255)
     @Column(name = "Password")
     private String password;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
     @OneToMany(mappedBy = "account")
     private List<Customer> customerList;
 
@@ -65,21 +66,6 @@ public class Accountcustomer implements Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @XmlTransient
     public List<Customer> getCustomerList() {
@@ -113,6 +99,22 @@ public class Accountcustomer implements Serializable {
     @Override
     public String toString() {
         return "entities.customer.Accountcustomer[ id=" + id + " ]";
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
 }

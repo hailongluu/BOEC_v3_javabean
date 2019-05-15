@@ -40,18 +40,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Employee.findByEmail", query = "SELECT e FROM Employee e WHERE e.email = :email")})
 public class Employee implements Serializable {
 
-    @Size(max = 255)
-    @Column(name = "Idnumber")
-    private String idnumber;
-    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
-    @Size(max = 255)
-    @Column(name = "Phone")
-    private String phone;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Size(max = 255)
-    @Column(name = "Email")
-    private String email;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -64,14 +52,21 @@ public class Employee implements Serializable {
     private Integer name;
     @Column(name = "Address")
     private Integer address;
+    @Size(max = 255)
+    @Column(name = "Idnumber")
+    private String idnumber;
+    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    @Size(max = 255)
+    @Column(name = "Phone")
+    private String phone;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    @Size(max = 255)
+    @Column(name = "Email")
+    private String email;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
     private List<Seller> sellerList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
     private List<Shipper> shipperList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
-    private List<Accountemployee> accountemployeeList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
-    private List<Addressemployee> addressemployeeList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
     private List<Manager> managerList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "employee")
@@ -116,6 +111,29 @@ public class Employee implements Serializable {
         this.address = address;
     }
 
+    public String getIdnumber() {
+        return idnumber;
+    }
+
+    public void setIdnumber(String idnumber) {
+        this.idnumber = idnumber;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     @XmlTransient
     public List<Seller> getSellerList() {
@@ -133,24 +151,6 @@ public class Employee implements Serializable {
 
     public void setShipperList(List<Shipper> shipperList) {
         this.shipperList = shipperList;
-    }
-
-    @XmlTransient
-    public List<Accountemployee> getAccountemployeeList() {
-        return accountemployeeList;
-    }
-
-    public void setAccountemployeeList(List<Accountemployee> accountemployeeList) {
-        this.accountemployeeList = accountemployeeList;
-    }
-
-    @XmlTransient
-    public List<Addressemployee> getAddressemployeeList() {
-        return addressemployeeList;
-    }
-
-    public void setAddressemployeeList(List<Addressemployee> addressemployeeList) {
-        this.addressemployeeList = addressemployeeList;
     }
 
     @XmlTransient
@@ -193,31 +193,7 @@ public class Employee implements Serializable {
 
     @Override
     public String toString() {
-        return "entities.Employee[ id=" + id + " ]";
-    }
-
-    public String getIdnumber() {
-        return idnumber;
-    }
-
-    public void setIdnumber(String idnumber) {
-        this.idnumber = idnumber;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+        return "entities.employee.Employee[ id=" + id + " ]";
     }
     
 }
