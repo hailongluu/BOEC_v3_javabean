@@ -49,19 +49,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Order1.findByShippingAddress", query = "SELECT o FROM Order1 o WHERE o.shippingAddress = :shippingAddress")})
 public class Order1 implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "Id")
-    private Integer id;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "BillID")
-    private int billID;
-    @Column(name = "DateCreated")
-    @Temporal(TemporalType.DATE)
-    private Date dateCreated;
+    private Integer billID;
     @Size(max = 255)
     @Column(name = "OrderStatus")
     private String orderStatus;
@@ -71,6 +60,22 @@ public class Order1 implements Serializable {
     @Size(max = 255)
     @Column(name = "ShippingAddress")
     private String shippingAddress;
+    @JoinColumn(name = "CustomerID", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private Customer customerID;
+    @JoinColumn(name = "SellerEmployeeID", referencedColumnName = "EmployeeID")
+    @ManyToOne(optional = false)
+    private Seller sellerEmployeeID;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "Id")
+    private Integer id;
+    @Column(name = "DateCreated")
+    @Temporal(TemporalType.DATE)
+    private Date dateCreated;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "order1")
     private Bill bill;
     @JoinColumn(name = "Id", referencedColumnName = "ID", insertable = false, updatable = false)
@@ -128,13 +133,6 @@ public class Order1 implements Serializable {
         this.id = id;
     }
 
-    public int getBillID() {
-        return billID;
-    }
-
-    public void setBillID(int billID) {
-        this.billID = billID;
-    }
 
     public Date getDateCreated() {
         return dateCreated;
@@ -144,29 +142,6 @@ public class Order1 implements Serializable {
         this.dateCreated = dateCreated;
     }
 
-    public String getOrderStatus() {
-        return orderStatus;
-    }
-
-    public void setOrderStatus(String orderStatus) {
-        this.orderStatus = orderStatus;
-    }
-
-    public String getShippingStatus() {
-        return shippingStatus;
-    }
-
-    public void setShippingStatus(String shippingStatus) {
-        this.shippingStatus = shippingStatus;
-    }
-
-    public String getShippingAddress() {
-        return shippingAddress;
-    }
-
-    public void setShippingAddress(String shippingAddress) {
-        this.shippingAddress = shippingAddress;
-    }
 
     public Bill getBill() {
         return bill;
@@ -231,5 +206,53 @@ public class Order1 implements Serializable {
    public void updateDeliveryState(){
        this.deliveryState.updateState(this);
    }
+
+    public Integer getBillID() {
+        return billID;
+    }
+
+    public void setBillID(Integer billID) {
+        this.billID = billID;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public String getShippingStatus() {
+        return shippingStatus;
+    }
+
+    public void setShippingStatus(String shippingStatus) {
+        this.shippingStatus = shippingStatus;
+    }
+
+    public String getShippingAddress() {
+        return shippingAddress;
+    }
+
+    public void setShippingAddress(String shippingAddress) {
+        this.shippingAddress = shippingAddress;
+    }
+
+    public Customer getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(Customer customerID) {
+        this.customerID = customerID;
+    }
+
+    public Seller getSellerEmployeeID() {
+        return sellerEmployeeID;
+    }
+
+    public void setSellerEmployeeID(Seller sellerEmployeeID) {
+        this.sellerEmployeeID = sellerEmployeeID;
+    }
 
 }

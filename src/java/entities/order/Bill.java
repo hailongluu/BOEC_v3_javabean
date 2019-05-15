@@ -34,7 +34,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Bill.findAll", query = "SELECT b FROM Bill b")
     , @NamedQuery(name = "Bill.findById", query = "SELECT b FROM Bill b WHERE b.id = :id")
     , @NamedQuery(name = "Bill.findByShippingMethood", query = "SELECT b FROM Bill b WHERE b.shippingMethood = :shippingMethood")
-    , @NamedQuery(name = "Bill.findByPaymentmethod", query = "SELECT b FROM Bill b WHERE b.paymentmethod = :paymentmethod")})
+    , @NamedQuery(name = "Bill.findByPaymentmethod", query = "SELECT b FROM Bill b WHERE b.paymentmethod = :paymentmethod")
+    , @NamedQuery(name = "Bill.findByName", query = "SELECT b FROM Bill b WHERE b.name = :name")
+    , @NamedQuery(name = "Bill.findByCity", query = "SELECT b FROM Bill b WHERE b.city = :city")
+    , @NamedQuery(name = "Bill.findByAdd", query = "SELECT b FROM Bill b WHERE b.add = :add")
+    , @NamedQuery(name = "Bill.findByPhone", query = "SELECT b FROM Bill b WHERE b.phone = :phone")})
 public class Bill implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,6 +53,19 @@ public class Bill implements Serializable {
     @Size(max = 255)
     @Column(name = "Paymentmethod")
     private String paymentmethod;
+    @Size(max = 45)
+    @Column(name = "name")
+    private String name;
+    @Size(max = 45)
+    @Column(name = "city")
+    private String city;
+    @Size(max = 45)
+    @Column(name = "add")
+    private String add;
+    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    @Size(max = 45)
+    @Column(name = "phone")
+    private String phone;
     @JoinColumn(name = "ID", referencedColumnName = "Id", insertable = false, updatable = false)
     @OneToOne(optional = false)
     private Order1 order1;
@@ -87,6 +104,38 @@ public class Bill implements Serializable {
 
     public void setPaymentmethod(String paymentmethod) {
         this.paymentmethod = paymentmethod;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getAdd() {
+        return add;
+    }
+
+    public void setAdd(String add) {
+        this.add = add;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Order1 getOrder1() {

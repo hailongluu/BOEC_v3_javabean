@@ -5,6 +5,7 @@
   Time: 9:26 PM
   To change this template use File | Settings | File Templates.
 --%>
+<%@page import="entities.customer.Customer"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -46,14 +47,14 @@
     <form method="post" class="form" role="form" action="payment">
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control"  placeholder="Your Name" name="sender" required>
+            <input type="text" class="form-control"  placeholder="Your Name" name="sender" required >
         </div>
         <div class="form-group">
             <label for="city">City</label>
             <select name="city" class="form-control">
-                <option value="hanoi">Hanoi</option>
-                <option value="danang">Danang</option>
-                <option value="hCM">HCM</option>
+                <option value="hanoi">Hà Nội</option>
+                <option value="danang">Đà Nẵng</option>
+                <option value="hCM">TP Hồ Chí Minh</option>
             </select>
         </div>
         <div class="form-group">
@@ -82,9 +83,9 @@
         <div class="form-group">
             <label for="payment">Payment method</label>
             <select name="payment" class="form-control">
-                <option value="cash">Cash</option>
-                <option value="visa">Visa Card</option>
-                <option value="member">BookStore Member Card</option>
+                <option value="cash">COD</option>
+                <option value="visa">Visa/Master Card</option>
+                <option value="member">ATM Domestic</option>
             </select>
         </div>
         <div class="form-group">

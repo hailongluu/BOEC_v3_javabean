@@ -44,9 +44,11 @@ public class Customer implements Serializable {
     @Column(name = "Idnumber")
     private String idnumber;
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
+    // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
     @Size(max = 255)
     @Column(name = "Phone")
     private String phone;
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 255)
     @Column(name = "Email")
@@ -176,6 +178,16 @@ public class Customer implements Serializable {
 		}
 	}
 
+
+    @XmlTransient
+    public List<Order1> getOrder1List() {
+        return order1List;
+    }
+
+    public void setOrder1List(List<Order1> order1List) {
+        this.order1List = order1List;
+    }
+
     public String getIdnumber() {
         return idnumber;
     }
@@ -198,14 +210,5 @@ public class Customer implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    @XmlTransient
-    public List<Order1> getOrder1List() {
-        return order1List;
-    }
-
-    public void setOrder1List(List<Order1> order1List) {
-        this.order1List = order1List;
     }
 }

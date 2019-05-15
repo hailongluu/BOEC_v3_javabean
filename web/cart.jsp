@@ -153,84 +153,16 @@
         <br> <br>
         <div class="row">
             <div class="col-xs-8 offset-xs-2  col-sm-4 offset-sm-2 col-md-4 offset-md-3 col-lg-4 offset-lg-3">
-                <a href="/home" class="btn btn-lg" style="background:#10a3e8;color:white;font-weight:800;">Continue
+                <a href=<%=request.getContextPath()+"/home"%> class="btn btn-lg" style="background:#10a3e8;color:white;font-weight:800;">Continue
                     Shopping</a>
             </div>
             <div class="col-xs-6 offset-xs-3 col-sm-4 offset-sm-2 col-md-4 offset-md-1 col-lg-4 ">
                 <a class="btn btn-lg" style="background:#10a3e8;color:white;font-weight:800;margin-top:5px;"
-                   class="btn btn-lg" data-toggle="modal" data-target="#query">Make Order</a>
+                   href=<%=request.getContextPath()+"/makeorder"%> >Make Order</a>
             </div>
         </div>
 
-        <div class="container">
-            <!-- Modal -->
-            <div class="modal fade" id="query" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header text-center">
-                            <h4 class="modal-title">Purchase Cart</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form method="post" class="form" role="form">
-                                <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" class="form-control" placeholder="Your Name" name="sender" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="city">City</label>
-                                    <select name="city" class="form-control">
-                                        <option value="hanoi">Hanoi</option>
-                                        <option value="danang">Danang</option>
-                                        <option value="hCM">HCM</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="province">Province</label>
-                                    <select name="province" class="form-control">
-                                        <option value="a">A</option>
-                                        <option value="b">B</option>
-                                        <option value="c">C</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="address">Address</label>
-                                    <input type="text" class="form-control" placeholder="Your Address" name="address"
-                                           required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="phone">Phone Number</label>
-                                    <input type="text" class="form-control" placeholder="Your Phone Number" name="phone"
-                                           required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="shipment">Shipment method</label>
-                                    <select name="shipment" class="form-control">
-                                        <option value="fast">Fast</option>
-                                        <option value="normal">Normal</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="payment">Payment method</label>
-                                    <select name="payment" class="form-control">
-                                        <option value="cash">Cash</option>
-                                        <option value="visa">Visa Card</option>
-                                        <option value="member">BookStore Member Card</option>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" name="submit" value="confirm" class="btn btn-block">
-                                        Confirm
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  
 
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -5,8 +5,11 @@
  */
 package entities.employee;
 
+import entities.order.Order1;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,10 +18,12 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,15 +38,18 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Seller.findByPosition", query = "SELECT s FROM Seller s WHERE s.position = :position")})
 public class Seller implements Serializable {
 
+    @Size(max = 255)
+    @Column(name = "Position")
+    private String position;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sellerEmployeeID")
+    private List<Order1> order1List;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "EmployeeID")
     private Integer employeeID;
-    @Size(max = 255)
-    @Column(name = "Position")
-    private String position;
     @JoinColumns({
         @JoinColumn(name = "EmployeeID", referencedColumnName = "ID", insertable = false, updatable = false)
         , @JoinColumn(name = "EmployeeID", referencedColumnName = "ID", insertable = false, updatable = false)})
@@ -63,13 +71,6 @@ public class Seller implements Serializable {
         this.employeeID = employeeID;
     }
 
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
 
     public Employee getEmployee() {
         return employee;
@@ -102,6 +103,23 @@ public class Seller implements Serializable {
     @Override
     public String toString() {
         return "entities.employee.Seller[ employeeID=" + employeeID + " ]";
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    @XmlTransient
+    public List<Order1> getOrder1List() {
+        return order1List;
+    }
+
+    public void setOrder1List(List<Order1> order1List) {
+        this.order1List = order1List;
     }
     
 }

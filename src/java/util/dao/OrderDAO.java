@@ -22,7 +22,7 @@ public interface OrderDAO {
 
     int addCart(Cart cart);
     
-    boolean addOrder(Order1 order);
+    int addOrder(Order1 order);
     
     boolean addBill(Bill bill);
     boolean updateOrder(Order1 order);

@@ -5,8 +5,11 @@
  */
 package entities.employee;
 
+import entities.order.Bill;
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,10 +18,12 @@ import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,15 +38,18 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Shipper.findByTransportation", query = "SELECT s FROM Shipper s WHERE s.transportation = :transportation")})
 public class Shipper implements Serializable {
 
+    @Size(max = 255)
+    @Column(name = "Transportation")
+    private String transportation;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "shipper")
+    private List<Bill> billList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
     @Column(name = "EmployeeID")
     private Integer employeeID;
-    @Size(max = 255)
-    @Column(name = "Transportation")
-    private String transportation;
     @JoinColumns({
         @JoinColumn(name = "EmployeeID", referencedColumnName = "ID", insertable = false, updatable = false)
         , @JoinColumn(name = "EmployeeID", referencedColumnName = "ID", insertable = false, updatable = false)})
@@ -63,13 +71,6 @@ public class Shipper implements Serializable {
         this.employeeID = employeeID;
     }
 
-    public String getTransportation() {
-        return transportation;
-    }
-
-    public void setTransportation(String transportation) {
-        this.transportation = transportation;
-    }
 
     public Employee getEmployee() {
         return employee;
@@ -102,6 +103,23 @@ public class Shipper implements Serializable {
     @Override
     public String toString() {
         return "entities.employee.Shipper[ employeeID=" + employeeID + " ]";
+    }
+
+    public String getTransportation() {
+        return transportation;
+    }
+
+    public void setTransportation(String transportation) {
+        this.transportation = transportation;
+    }
+
+    @XmlTransient
+    public List<Bill> getBillList() {
+        return billList;
+    }
+
+    public void setBillList(List<Bill> billList) {
+        this.billList = billList;
     }
     
 }

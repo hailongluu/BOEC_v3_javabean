@@ -82,7 +82,7 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public boolean addOrder(Order1 order) {
+    public int addOrder(Order1 order) {
         try {
             String sql = "INSERT INTO order1 (`Id`, `SellerEmployeeID`, `CustomerID`, `DateCreated`, `OrderStatus`, `ShippingStatus`, `ShippingAddress`)"
                     + " VALUES (?, ?, ?, ?, ?, ?, ?);";
@@ -97,15 +97,33 @@ public class OrderDAOImpl implements OrderDAO {
             pre.setString(7, order.getShippingAddress());
             String s = pre.toString();
             pre.executeUpdate();
-            return true;
+            return id;
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;
+        return 0;
     }
 
     @Override
     public boolean addBill(Bill bill) {
+        try {
+            String sql = "INSERT INTO bill (`ID`, `ShipperEmployeeID`, `ShippingMethood`, `Paymentmethod`, `name`, `city`, `add`, `phone`)"
+                    + " VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+            PreparedStatement pre = connection.prepareStatement(sql);
+            int id = addOrder(bill.getOrder1());
+            pre.setInt(1, id);
+            pre.setInt(2, bill.getShipper().getEmployeeID());
+            pre.setString(3, bill.getShippingMethood());
+            pre.setString(4, bill.getPaymentmethod());
+            pre.setString(5, bill.getName());
+            pre.setString(6, bill.getCity());
+            pre.setString(7, bill.getAdd());
+            pre.setString(8, bill.getPhone());
+            pre.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return false;
     }
 

@@ -7,6 +7,7 @@ package controller;
  */
 import entities.customer.Accountcustomer;
 import entities.customer.Customer;
+import entities.order.Order1;
 import entities.product.Product;
 import entities.product.book.Book;
 import entities.product.clother.Clothes;
@@ -25,6 +26,7 @@ import session.BookFacadeLocal;
 import session.ClothesFacadeLocal;
 import session.CustomerFacadeLocal;
 import session.ElectronicsFacadeLocal;
+import session.Order1FacadeLocal;
 import session.ProductFacadeLocal;
 
 /**
@@ -33,6 +35,9 @@ import session.ProductFacadeLocal;
  */
 @WebServlet(urlPatterns = {"/view"})
 public class ViewProduct extends HttpServlet {
+
+    @EJB
+    private Order1FacadeLocal order1Facade;
 
     @EJB
     private ClothesFacadeLocal clothesFacade;
@@ -51,6 +56,7 @@ public class ViewProduct extends HttpServlet {
 
     @EJB
     private ProductFacadeLocal productFacade;
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -72,8 +78,9 @@ public class ViewProduct extends HttpServlet {
         List<Electronics> listElectronicses = new ArrayList<>();
         listClothers.addAll(clothesFacade.findAll());
         listElectronicses.addAll(electronicsFacade.findAll());
+        List<Order1> listOrder1s = new ArrayList<>();
         books = bookFacade.findAll();
-        
+        listOrder1s.addAll(order1Facade.findAll());
         customers.addAll(customerFacade.findAll());
         products.addAll(productFacade.findAll());
         ac.addAll(accountcustomerFacade.findAll());
