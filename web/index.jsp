@@ -215,7 +215,7 @@
 
                     <div class="carousel-item">
                         <div class="row">
-                            <c:forEach var="index" begin="0" end="3">
+                            <c:forEach var="index" begin="4" end="7">
                                 <%Product book2 = listProducts.get((Integer) pageContext.getAttribute("index"));%>
                                 <div class="col-sm-6 col-md-3 col-lg-3">
                                     <a href="detail.jsp?id=<%=book2.getId()%>">
@@ -225,7 +225,7 @@
                                             <img class="block-center img-responsive" src=<%=book2.getImageLink()%> style="width:200px; height=:200px">
                                             <hr>
                                             <%=book2.getName()%> <br>
-                                            <%=book2.getPrice()%> $
+                                            <%=book2.getPrice()%> 
                                         </div>
                                     </a>
                                 </div>
@@ -270,7 +270,7 @@
                                             <img class="block-center img-responsive" src=<%=elec1.getImageLink()%> style="width:200px; height=:200px">
                                             <hr>
                                             <%=elec1.getName()%> <br>
-                                            <%=elec1.getPrice()%> $
+                                            <%=elec1.getPrice()%> 
                                         </div>
                                     </a>
                                 </div>
@@ -281,7 +281,7 @@
 
                     <div class="carousel-item">
                         <div class="row">
-                            <c:forEach var="index" begin="0" end="3">
+                            <c:forEach var="index" begin="4" end="7">
                                 <%Product elec2 = listProducts.get((Integer) pageContext.getAttribute("index"));%>
                                 <div class="col-sm-6 col-md-3 col-lg-3">
                                     <a href="detail.jsp?id=<%=elec2.getId()%>">
@@ -291,7 +291,7 @@
                                             <img class="block-center img-responsive" src=<%=elec2.getImageLink()%> style="width:200px; height=:200px">
                                             <hr>
                                             <%=elec2.getName()%> <br>
-                                            <%=elec2.getPrice()%> $
+                                            <%=elec2.getPrice()%> 
                                         </div>
                                     </a>
                                 </div>
@@ -336,7 +336,7 @@
                                             <img class="block-center img-responsive" src=<%=other1.getImageLink()%> style="width:200px; height=:200px">
                                             <hr>
                                             <%=other1.getName()%> <br>
-                                            <%=other1.getPrice()%> $
+                                            <%=other1.getPrice()%> VND
                                         </div>
                                     </a>
                                 </div>
@@ -347,7 +347,7 @@
 
                     <div class="carousel-item">
                         <div class="row">
-                            <c:forEach var="index" begin="0" end="3">
+                            <c:forEach var="index" begin="4" end="7">
                                 <%Product other2 = listProducts.get((Integer) pageContext.getAttribute("index"));%>
                                 <div class="col-sm-6 col-md-3 col-lg-3">
                                     <a href="detail.jsp?id=<%=other2.getId()%>">
@@ -357,7 +357,7 @@
                                             <img class="block-center img-responsive" src=<%=other2.getImageLink()%> style="width:200px; height=:200px">
                                             <hr>
                                             <%=other2.getName()%> <br>
-                                            <%=other2.getPrice()%> $
+                                            <%=other2.getPrice()%> VND
                                         </div>
                                     </a>
                                 </div>
