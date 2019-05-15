@@ -7,6 +7,9 @@ package entities.order;
 
 import entities.customer.Customer;
 import entities.employee.Seller;
+import entities.order.state.DeliveryState;
+import entities.order.state.OrderState;
+import entities.order.state.Paid;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -34,7 +37,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author hailongluu
  */
 @Entity
-@Table(name = "order")
+@Table(name = "order1")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Order1.findAll", query = "SELECT o FROM Order1 o")
@@ -84,6 +87,27 @@ public class Order1 implements Serializable {
     @ManyToOne(optional = false)
     private Seller seller;
 
+    public static OrderState orderState;
+    public static DeliveryState deliveryState;
+
+    public OrderState getOrderState() {
+        return orderState;
+    }
+
+    public void setOrderState(OrderState orderState) {
+        this.orderState = orderState;
+    }
+
+    public DeliveryState getDeliveryState() {
+        return deliveryState;
+    }
+
+    public void setDeliveryState(DeliveryState deliveryState) {
+        this.deliveryState = deliveryState;
+    }
+
+  
+    
     public Order1() {
     }
 
@@ -200,5 +224,12 @@ public class Order1 implements Serializable {
     public String toString() {
         return "entities.order.Order1[ id=" + id + " ]";
     }
-    
+
+   public void updateOrderState(){
+       this.orderState.updateState(this);
+   }
+   public void updateDeliveryState(){
+       this.deliveryState.updateState(this);
+   }
+
 }
