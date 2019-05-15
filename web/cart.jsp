@@ -100,6 +100,7 @@
             Cart cart = (Cart) request.getAttribute("cart");
             ArrayList<CartProduct> listCartProducts = new ArrayList<>();
             listCartProducts.addAll(cart.getCartProductList());
+            int removeIndex = -1;
         %>
 
         <div class="container-fluid" id="cart">
@@ -129,7 +130,7 @@
                                     Quantity : <%=listCartProducts.get(i).getQuantity()%> <br>
                                     Price : <%=p.getPrice().toString()%> VND<br>
                                     Sub Total : <%=p.getPrice().multiply(new BigInteger(Integer.toString(listCartProducts.get(i).getQuantity()))).toString()%> VND<br>
-                                    <a href="cart.jsp?remove='.$row['PID'].'" class="btn btn-sm"
+                                    <a onClick="" class="btn btn-sm"
                                        style="background:#10a3e8;color:white;font-weight:800;">
                                         Remove
                                     </a>
