@@ -358,7 +358,7 @@
                 <div class="content-footer">
                     <p>
                         Hanoi, 2019 <br>
-                        Powered By <b> TACA TEAM </b>
+                        Powered By <b> TAKA TEAM </b>
                     </p>
                 </div>
             </div>

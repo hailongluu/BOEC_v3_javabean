@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -77,6 +78,12 @@ public class CartManagementController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int index = Integer.parseInt(request.getParameter("productIndex"));
+        Cart cart = (Cart) request.getSession().getAttribute("cart");
+        List<CartProduct> listCartProducts = cart.getCartProductList();
+        listCartProducts.remove(index);
+        request.setAttribute("cart", cart);
+        request.getRequestDispatcher("cart.jsp").forward(request, response);
     }
 
     /**

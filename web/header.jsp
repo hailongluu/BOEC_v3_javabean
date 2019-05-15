@@ -30,6 +30,9 @@
                 <% if (session.getAttribute("isLogin") != null) {
                 Customer customer = (Customer) session.getAttribute("customer");      
                 %>
+                    <div style="margin: 20px 10px">
+                        <a href="/boecdemov3/cart"><img  src="img/cart.png" style="width: 33px"/></a>
+                    </div>
                     <div class="dropdown" style="color: white;margin: 25px;font-size: 19px;">
                         <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <%=customer.getName().getFullName()%>
@@ -42,10 +45,10 @@
                     </div>
                 <% } else { %>
                 <li style="margin: 15px;">
-                    <a type="button" id="login_button" class="btn btn-lg" href="login.jsp" onclick="action()">Login</a>
+                    <a type="button" id="login_button" class="btn btn-primary" href="login.jsp" onclick="action()" style="margin-top: 5px">Login</a>
                 </li>
                 <li style="margin: 15px 0">
-                    <a type="button" id="register_button" class="btn btn-lg" href="register.jsp" onclick="action()">Sign Up</a>
+                    <a type="button" id="register_button" class="btn btn-primary" href="register.jsp" onclick="action()" style="margin-top: 5px">Sign Up</a>
                 </li>
                 <% } %>
             </ul>
