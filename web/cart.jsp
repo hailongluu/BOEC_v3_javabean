@@ -325,7 +325,7 @@
                                                                 <img src=<%=product.getImageLink()%> class="media-photo">
                                                             </a>
                                                             <div class="media-body">
-                                                                <span type="button" onClick="btnRemoveClick(this)" class="pull-right btn btn-danger" style="text-decoration: none;" value=<%= i %>>X</span>
+                                                                <span type="button" onClick="btnRemoveClick(this)" class="pull-right btn btn-danger" style="text-decoration: none;" value="<%= i %>">X</span>
                                                                 <h4 class="title">
                                                                     <%=product.getName()%>
                                                                     <!--<span class="pull-right Success">(Success)</span>-->
@@ -452,7 +452,6 @@
         <script src="js/bootstrap.min.js"></script>
         <script>
             function btnRemoveClick(btn) {
-                btn.hide();
             }
         </script>
     </body>
