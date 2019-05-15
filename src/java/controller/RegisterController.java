@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,8 +32,6 @@ public class RegisterController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -64,20 +63,23 @@ public class RegisterController extends HttpServlet {
         String password = request.getParameter("password");
         String address = request.getParameter("add");
         String contact = request.getParameter("contact");
-        if(first_name.isEmpty() || last_name.isEmpty() || username.isEmpty() ||
-                password.isEmpty() || address.isEmpty() || contact.isEmpty())
-        {
+
+        if (first_name.isEmpty() || last_name.isEmpty() || username.isEmpty()
+                || password.isEmpty() || address.isEmpty() || contact.isEmpty()) {
             RequestDispatcher req = request.getRequestDispatcher("register.jsp");
             req.include(request, response);
-        }
-        else{
+        } else {
 
-            Customer customer = new Customer.CustomerBuilder(username,password,first_name,last_name)
+            Customer customer = new Customer.CustomerBuilder(username, password, first_name, last_name)
                     .address(address)
                     .phone(contact)
                     .build();
+            HttpSession session = request.getSession();
+            session.setAttribute("isLogin", "true");
+            session.setAttribute("customer", customer);
             RequestDispatcher req = request.getRequestDispatcher("register_success.jsp");
             req.forward(request, response);
+
         }
     }
 
