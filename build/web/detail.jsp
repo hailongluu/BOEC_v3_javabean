@@ -1,7 +1,6 @@
-<%@ page import="group.faf.bookstore.model.product.book.BookDAOImpl" %>
-<%@ page import="group.faf.bookstore.model.product.book.Book" %>
-<%@ page import="group.faf.bookstore.model.order.Cart" %>
-<%@ page import="group.faf.bookstore.model.product.Product" %>
+<%@page import="entities.product.Product"%>
+<%@page import="session.BookFacade"%>
+<%@page import="entities.product.book.Book"%>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 <!DOCTYPE html>
@@ -82,8 +81,8 @@
 <body>
 <%@ include file="header.jsp" %>
 <%
-    BookDAOImpl bookDAO = new BookDAOImpl();
-    Book book = bookDAO.getBookById(Integer.parseInt(request.getParameter("id")));
+    Product product = (Product) session.getAttribute("product");
+    int type = (Integer) session.getAttribute("type");
 %>
 
 <%-- <?jsp
@@ -104,13 +103,13 @@ echo ' --%>
             <div class="tag">50% OFF</div>
             <div class="tag-side"><img src="img/orange-flag.png">
             </div>
-            <img class="center-block img-responsive" src=<%=book.getImageLink()%> height="550px" style="padding:20px;">
+            <img class="center-block img-responsive" src=<%=product.getImageLink()%> height="550px" style="padding:20px;">
         </div>
         <div class="col-sm-10 col-md-4 offset-md-1">
-            <h2 id="product_name"><%=book.getName()%>
+            <h2 id="product_name"><%=product.getName()%>
             </h2>
             <span style="color:#00B9F5;">
-                                    <%=book.getAuthor() + " - " + book.getPublisher()%>
+                                    <%=product.getBook().getAuthor() + " - " + product.getBook().getPublisherId()%>
                                 <%--Nguyen X - NXB GIAO DUC--%>
                                 </span>
             <hr>

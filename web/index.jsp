@@ -177,9 +177,9 @@
 </div>
 
 <%--# BOOK--%>
-<div style="text-align: left; font-size: 25px; font-family: sans-serif; padding-top: 20px; font-weight: 400; padding-left: 3px;">
-    <div class="tag">TOP TRENDING BOOKS</div>
-    <div class="tag-side"><img src="img/tag.png"></div>
+<div style="text-align: left; font-size: 25px; font-family: sans-serif; padding-top: 20px; font-weight: 400; padding-left: 10px;">
+    <div class="tag" style="height: 100%">TOP TRENDING BOOKS</div>
+    <div class="tag-side" style="padding-top: 10px;"><img src="img/tag.png" style="width: 150%; height: 150%"></div>
 </div>
 <br>
 <div class="container-fluid text-center" id="new">
@@ -193,17 +193,22 @@
             <div id="blogCarousel" class="carousel slide" data-ride="carousel">
 
                 <ol class="carousel-indicators">
-                    <li data-target="#blogCarousel" data-slide-to="0" class="active"></li>
-                    <li data-target="#blogCarousel" data-slide-to="1"></li>
+                    <%
+                        int iterations = listProducts.size() / 4;
+                        for (int ite = 0; ite < iterations; ite++) {
+                    %>
+                            <li data-target="#blogCarousel" data-slide-to="<%=ite%>" class="active"></li>
+                    <%
+                        }
+                    %>
                 </ol>
 
                 <!-- Carousel items -->
                 <div class="carousel-inner">
                     <%
-                        int iteration = listProducts.size() / 4;
-                        for (int i = 0; i < iteration; i++) {
-                            int startIndex = i * iteration;
-                            int endIndex = (i == iteration - 1) ? listProducts.size() : startIndex + 3;
+                        for (int i = 0; i < iterations; i++) {
+                            int startIndex = i * iterations;
+                            int endIndex = (i == iterations - 1) ? listProducts.size() : startIndex + 3;
                     %>                    
                         <div class="carousel-item active">
                             <div class="row">
@@ -216,33 +221,10 @@
                                             <div class="book-block">
                                                 <div class="tag">New</div>
                                                 <div class="tag-side"><img src="img/tag.png"></div>
-                                                <img class="block-center img-responsive" src=<%=product.getImageLink()%> style="width:200px; height=:200px">
+                                                <img class="block-center img-responsive" src="<%=product.getImageLink()%>" style="width: 200px; height: 200px;">
                                                 <hr>
-                                                    <%=product.getName()%> <br>
-                                                    <%=product.getPrice()%> VND
-                                            </div>
-                                        </a>
-                                    </div>
-                                <%
-                                    }
-                                %>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <div class="row">
-                                <%
-                                    for (int j = startIndex; j < endIndex; j++) {
-                                %>
-                                    <%Product product = listProducts.get(j);%>
-                                    <div class="col-sm-6 col-md-3 col-lg-3">
-                                        <a href="detail.jsp?id=<%=product.getId()%>">
-                                            <div class="book-block">
-                                                <div class="tag">New</div>
-                                                <div class="tag-side"><img src="img/tag.png"></div>
-                                                <img class="block-center img-responsive" src=<%=product.getImageLink()%> style="width:200px; height=:200px">
-                                                <hr>
-                                                    <%=product.getName()%> <br>
-                                                    <%=product.getPrice()%> VND
+                                                    <%=(product.getName().length() < 30) ? product.getName() : product.getName().substring(0, 27) + "..."%> <br>
+                                                    <%=product.getPrice()%> USD
                                             </div>
                                         </a>
                                     </div>
@@ -263,7 +245,6 @@
         </div>
     </div>
 </div>
-
 
 <footer style="margin-top: 50px;">
     <div class="container-fluid">

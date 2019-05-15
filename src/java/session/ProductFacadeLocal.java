@@ -27,7 +27,7 @@ public interface ProductFacadeLocal {
     List<Product> findAll();
 
     List<Product> findRange(int[] range);
-
+    
     int count();
     
 }
