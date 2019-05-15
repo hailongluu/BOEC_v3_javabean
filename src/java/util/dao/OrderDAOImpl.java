@@ -9,6 +9,8 @@ import entities.order.Bill;
 import entities.order.Cart;
 import entities.order.CartProduct;
 import entities.order.Order1;
+import entities.order.state.*;
+import entities.order.state.Shipped;
 import entities.product.Product;
 import java.math.BigInteger;
 import java.sql.Connection;
@@ -133,11 +135,11 @@ public class OrderDAOImpl implements OrderDAO {
     @Override
     public boolean updateOrder(Order1 order) {
         try {
-            String sql = "UPDATE order1 SET `OrderStatus` = ?, `ShippingStatus` = ? WHERE (`Id` = ?);";
+            String sql = "UPDATE order1 SET `ShippingStatus` = ? WHERE (`Id` = ?);";
             PreparedStatement pre = connection.prepareStatement(sql);
-            pre.setString(1, order.getOrderState().getName());
-            pre.setString(2, order.getDeliveryState().getName());
-            pre.setInt(3, order.getCart().getId());
+            pre.setString(1, order.getDeliveryState().getName());
+            pre.setInt(2, order.getId());
+            String s=pre.toString();
             pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
@@ -207,6 +209,48 @@ public class OrderDAOImpl implements OrderDAO {
             Logger.getLogger(CustomerDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+     public List<Order1> findOrderByEmId(int id) {
+        try {
+            List<Order1> list = new ArrayList<>();
+            String sql = "SELECT * FROM order1 WHERE SellerEmployeeID = ?";
+            PreparedStatement pre = connection.prepareStatement(sql);
+            pre.setInt(1, id);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                Order1 order = new Order1(rs.getInt(1));
+                order.setShippingAddress(rs.getString(7));
+                order.setOrderStatus(rs.getString(5));
+                order.setDateCreated(TimeConvert.converToDate(rs.getString(4)));
+                order.setShippingStatus(rs.getString(6));
+                order.setDeliveryState(getShippingState(order.getShippingStatus()));
+                Cart cart = findCartById(rs.getInt(1));
+                order.setCart(cart);
+                list.add(order);
+            }
+            return list;
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public DeliveryState getShippingState(String state){
+        switch (state) {
+                case "Packaged": {
+                    return Packaged.getInstance();
+                }
+                case "Shipped": {
+                    return Shipped.getInstance();
+                }
+                case "OutForDelivery": {
+                    return OutForDelivery.getInstance();
+                }
+                case "Delivered": {
+                   return Delivered.getInstance();
+                }
+                default:
+                    return null;
+            }
     }
 
 }

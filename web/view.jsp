@@ -4,6 +4,8 @@
     Author     : hailongluu
 --%>
 
+<%@page import="util.TimeConvert"%>
+<%@page import="entities.order.Order1"%>
 <%@page import="entities.product.Product"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,28 +13,30 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Manager Page</title>
     </head>
     <body>
-        <h1>get full book</h1>
+        <h1>Update State For Order</h1>
         <table border="1">
             <tr>
-                <th>name</th>
-                <th>author</th>
-                <th>publisher</th>
-                <th>price</th>
-                <th>select</th>
+                <th>Order ID</th>
+                <th>Date Created</th>
+                <th>Price</th>
+                <th>Shipping Address</th>
+                <th>Shipping Status</th>
+
             </tr>
             <%
-                List<Product> lisBooks = (List<Product>) session.getAttribute("listProducts");
-                for (int i = 0; i < lisBooks.size(); i++) {
+                List<Order1> listOrders = (List<Order1>) session.getAttribute("listEmOrders");
+                for (int i = 0; i < listOrders.size(); i++) {
             %>
             <tr>
-                <td><%=lisBooks.get(i).getName()%></td>
-                <td><%=lisBooks.get(i).getPrice()%></td>
-                <td><%=lisBooks.get(i).getQuantity()%></td>
-                <td><%=lisBooks.get(i).getPrice()%></td>
-                <td><a href="doCart?index=<%=i%>">add cart</a></td>
+                <td><%=listOrders.get(i).getId()%></td>
+                <td><%=TimeConvert.convertToString(listOrders.get(i).getDateCreated())%></td>
+                <td><%=listOrders.get(i).getCart().getTotalPrice().toString()%></td>
+                <td><%=listOrders.get(i).getShippingAddress()%></td>
+                <td><%=listOrders.get(i).getShippingStatus()%></td>
+                <td><a href="updatestate?index=<%=listOrders.get(i).getId()%>">Update Status</a></td>
             </tr>
             <%
                 }

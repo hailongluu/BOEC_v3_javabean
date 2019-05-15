@@ -92,8 +92,8 @@ public class Order1 implements Serializable {
     @ManyToOne(optional = false)
     private Seller seller;
 
-    public static OrderState orderState;
-    public static DeliveryState deliveryState;
+    public  OrderState orderState;
+    public  DeliveryState deliveryState;
 
     public OrderState getOrderState() {
         return orderState;
@@ -205,6 +205,7 @@ public class Order1 implements Serializable {
    }
    public void updateDeliveryState(){
        this.deliveryState.updateState(this);
+//       this.setShippingStatus(deliveryState.getName());
    }
 
     public Integer getBillID() {
