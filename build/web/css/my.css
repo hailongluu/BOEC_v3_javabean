@@ -1,0 +1,59 @@
+body {font-family:"Open sans";background: #F5F8F9;overflow-x:hidden;}
+.navbar {background:#393E41;display:inline-block;z-index:100;color:#000;}
+.navbar li a {color:#10a3e8!important;}
+#top {border:1px solid #DEEAEE;background:#fff;border-radius:10px;}
+#searchbox {background:#10a3e8;overflow: visible;}
+#header{margin-top:20px;}
+#myCarousel {border:1px solid #ccc;}
+#myCarousel img {width:100%;}
+#category ul{list-style-type:none;overflow:hidden;width:100%; border:1px solid #ccc;background: #fff; border-bottom-right-radius:10px;border-bottom-left-radius: 10px;}
+#category li {display:block; font-weight:400; padding:10px; border-top: 1px solid #ccc;margin-left:-40px; }
+#offer img {margin-bottom:15px;border:1px solid #DEEAEE;}
+#new {font-weight:800;}
+.tag {display:inline;float:left;padding:2px 5px;width:auto;background:#90e137;color:#fff;height:23px;}
+.tag-side{display:inline;float:left;}
+.book-block {padding:5px;background:#fff; border :1px solid #DEEAEE;border-radius:10px;}
+#author {margin-top:20px; background:#fff; border :1px solid #DEEAEE;border-radius:10px;}
+#author .row {margin-top: 20px; margin-bottom:20px;}
+#author h3{color:rgb(228, 55, 25);}
+footer {background:#ffffff!important;margin-top: 20px;border:1px solid #DEEAEE;border-radius:5px;color:#10a3e8!important;}
+footer .row {padding:10px;}
+.navbar-horizontal {
+    flex-direction: row;
+}
+.navbar-login
+{
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.navbar-login-session
+{
+    padding: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.icon-size
+{
+    font-size: 87px;
+}
+.blog .carousel-indicators {
+    left: 0;
+    top: auto;
+    bottom: -40px;
+
+}
+
+/* The colour of the indicators */
+.blog .carousel-indicators li {
+    background: #a3a3a3;
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+}
+
+.blog .carousel-indicators .active {
+    background: #707070;
+}

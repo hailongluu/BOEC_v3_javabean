@@ -80,7 +80,7 @@
 <%@ include file="header.jsp" %>
 <%
     Product product = (Product) session.getAttribute("product");
-    int type = (Integer) session.getAttribute("type");
+    Integer type = (Integer) session.getAttribute("type");
 %>
 
 <%-- <?jsp
@@ -110,7 +110,11 @@ echo ' --%>
                 <%
                     if (type == 0) {
                 %>
-                        <%=product.getBook().getAuthor() + " - " + product.getBook().getPublisherId().getName()%>
+                        <%=product.getBook().getAuthor()%> - <%=(product.getBook().getPublisherId() == null) ? "Unknown" : product.getBook().getPublisherId().getName()%>
+                <%
+                    } else {
+                %>
+                        <%=product.getName()%>
                 <%
                     }
                 %>
@@ -147,7 +151,7 @@ echo ' --%>
                     TITLE         <%=product.getName()%> <hr>
                     AUTHOR        <%=product.getBook().getAuthor()%> <hr>
                     AVAILABLE     20 <hr>
-                    PUBLISHER     <%=product.getBook().getPublisherId().getName()%><hr>
+                    PUBLISHER     <%=(product.getBook().getPublisherId() == null) ? "Unknown" : product.getBook().getPublisherId().getName()%><hr>
                     EDITION       6th <hr>
                     LANGUAGE      Vietnamese <hr>
                     PAGES         <%=product.getBook().getNumOfPage()%> <hr>
@@ -187,9 +191,9 @@ echo ' --%>
 </div>
 
 
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+ jQuery (necessary for Bootstrap's JavaScript plugins) 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
+ Include all compiled plugins (below), or include individual files as needed 
 <script src="js/bootstrap.min.js"></script>
 <script>
     // $(function () {
